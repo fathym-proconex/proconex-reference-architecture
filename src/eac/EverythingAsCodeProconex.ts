@@ -1,9 +1,12 @@
-import { EverythingAsCodeDFS } from '../src.deps.ts';
+import { EverythingAsCode, EverythingAsCodeDFS } from '../src.deps.ts';
 import { EaCProconexURProfileAsCode } from './EaCProconexURProfileAsCode.ts';
 import { EaCProconexURWorkflowAsCode } from './EaCProconexURWorkflowAsCode.ts';
 
-export type EverythingAsCodeProconex = {
-  Profiles: EaCProconexURProfileAsCode;
+export type EverythingAsCodeProconex =
+  & {
+    Profiles: EaCProconexURProfileAsCode;
 
-  Workflows: EaCProconexURWorkflowAsCode;
-} & EverythingAsCodeDFS;
+    Workflows: EaCProconexURWorkflowAsCode;
+  }
+  & EverythingAsCodeDFS
+  & EverythingAsCode;
