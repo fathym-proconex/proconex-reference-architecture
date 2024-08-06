@@ -6,7 +6,7 @@ export type EaCProconexURWorkflowDetails = {
   Documents: Record<
     string,
     {
-      ProfileLookup: string;
+      ProfileLookup?: string;
     }
   >;
 } & EaCVertexDetails;
