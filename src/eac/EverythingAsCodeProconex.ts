@@ -4,9 +4,9 @@ import { EaCProconexURWorkflowAsCode } from './EaCProconexURWorkflowAsCode.ts';
 
 export type EverythingAsCodeProconex =
   & {
-    Profiles?: Record<string, EaCProconexURProfileAsCode>;
+    Profiles?: Record<string, EaCProconexURProfileAsCode | null>;
 
-    Workflows?: Record<string, EaCProconexURWorkflowAsCode>;
+    Workflows?: Record<string, EaCProconexURWorkflowAsCode | null>;
   }
   & EverythingAsCodeDFS
   & EverythingAsCode;

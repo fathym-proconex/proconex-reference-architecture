@@ -7,7 +7,7 @@ export type EaCProconexURWorkflowDetails = {
     string,
     {
       ProfileLookup?: string;
-    }
+    } | null
   >;
 } & EaCVertexDetails;
 
