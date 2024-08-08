@@ -20,6 +20,17 @@ export class ProconexServiceClient extends EaCBaseClient {
 
   //#region API Methods
   Workflows = {
+    Create: async (workflowName: string): Promise<EaCStatus> => {
+      const response = await fetch(this.loadClientUrl(`workflows`), {
+        method: 'POST',
+        headers: this.loadHeaders(),
+        body: JSON.stringify({
+          WorkflowName: workflowName,
+        }),
+      });
+
+      return await this.json(response);
+    },
     Delete: async (workflowLookup: string): Promise<EaCStatus> => {
       const response = await fetch(
         this.loadClientUrl(`workflows/${workflowLookup}`),
@@ -33,9 +44,14 @@ export class ProconexServiceClient extends EaCBaseClient {
     },
 
     Documents: {
-      Delete: async (workflowLookup: string, docLookup: string): Promise<EaCStatus> => {
+      Delete: async (
+        workflowLookup: string,
+        docLookup: string,
+      ): Promise<EaCStatus> => {
         const response = await fetch(
-          this.loadClientUrl(`workflows/${workflowLookup}/documents/${docLookup}`),
+          this.loadClientUrl(
+            `workflows/${workflowLookup}/documents/${docLookup}`,
+          ),
           {
             method: 'DELETE',
             headers: this.loadHeaders(),
@@ -114,6 +130,17 @@ export class ProconexServiceClient extends EaCBaseClient {
   };
 
   Workspaces = {
+    Create: async (workspaceName: string): Promise<EaCStatus> => {
+      const response = await fetch(this.loadClientUrl(`workspaces`), {
+        method: 'POST',
+        headers: this.loadHeaders(),
+        body: JSON.stringify({
+          WorkspaceName: workspaceName,
+        }),
+      });
+
+      return await this.json(response);
+    },
     Delete: async (): Promise<EaCStatus> => {
       const response = await fetch(this.loadClientUrl(`workspaces`), {
         method: 'DELETE',

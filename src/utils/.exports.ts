@@ -1,1 +1,1 @@
-export * from './sampleFunction.ts';
+export * from './createDocPath.ts';

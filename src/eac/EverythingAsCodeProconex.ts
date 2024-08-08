@@ -1,4 +1,9 @@
-import { EverythingAsCode, EverythingAsCodeDFS } from '../src.deps.ts';
+import {
+  EverythingAsCode,
+  EverythingAsCodeDatabases,
+  EverythingAsCodeDFS,
+  EverythingAsCodeSynaptic,
+} from '../src.deps.ts';
 import { EaCProconexURProfileAsCode } from './EaCProconexURProfileAsCode.ts';
 import { EaCProconexURWorkflowAsCode } from './EaCProconexURWorkflowAsCode.ts';
 
@@ -8,5 +13,7 @@ export type EverythingAsCodeProconex =
 
     Workflows?: Record<string, EaCProconexURWorkflowAsCode | null>;
   }
+  & EverythingAsCodeDatabases
   & EverythingAsCodeDFS
+  & EverythingAsCodeSynaptic
   & EverythingAsCode;
