@@ -1,16 +1,19 @@
 import { EverythingAsCodeProconex } from '../eac/EverythingAsCodeProconex.ts';
-import { EaCBaseClient, EaCStatus, establishHeaders, UserEaCRecord } from '../src.deps.ts';
+import {
+  EaCBaseClient,
+  EaCStatus,
+  establishHeaders,
+  UserEaCRecord,
+} from '../src.deps.ts';
 
-export type UserWorkspaceRecrod =
-  & Omit<
-    UserEaCRecord,
-    'EnterpriseLookup' | 'EnterpriseName'
-  >
-  & {
-    WorkspaceLookup: string;
+export type UserWorkspaceRecrod = Omit<
+  UserEaCRecord,
+  'EnterpriseLookup' | 'EnterpriseName'
+> & {
+  WorkspaceLookup: string;
 
-    WorkspaceName: string;
-  };
+  WorkspaceName: string;
+};
 
 export class ProconexServiceClient extends EaCBaseClient {
   /** */
@@ -37,7 +40,7 @@ export class ProconexServiceClient extends EaCBaseClient {
         {
           method: 'DELETE',
           headers: this.loadHeaders(),
-        },
+        }
       );
 
       return await this.json(response);
@@ -46,16 +49,16 @@ export class ProconexServiceClient extends EaCBaseClient {
     Documents: {
       Delete: async (
         workflowLookup: string,
-        docLookup: string,
+        docLookup: string
       ): Promise<EaCStatus> => {
         const response = await fetch(
           this.loadClientUrl(
-            `workflows/${workflowLookup}/documents/${docLookup}`,
+            `workflows/${workflowLookup}/documents/${docLookup}`
           ),
           {
             method: 'DELETE',
             headers: this.loadHeaders(),
-          },
+          }
         );
 
         return await this.json(response);
@@ -63,15 +66,16 @@ export class ProconexServiceClient extends EaCBaseClient {
       Download: async (
         workflowLookup: string,
         docLookup: string,
+        attach: boolean
       ): Promise<Response> => {
         const response = await fetch(
           this.loadClientUrl(
-            `workflows/${workflowLookup}/documents/${docLookup}/download`,
+            `workflows/${workflowLookup}/documents/${docLookup}/download?attach=${attach}`
           ),
           {
             method: 'GET',
             headers: this.loadHeaders(),
-          },
+          }
         );
 
         return response;
@@ -79,7 +83,7 @@ export class ProconexServiceClient extends EaCBaseClient {
       Upload: async (
         workflowLookup: string,
         data: FormData,
-        headers: Headers,
+        headers: Headers
       ): Promise<Response> => {
         const headersInit = Array.from(headers.entries()).reduce(
           (acc, [key, value]) => {
@@ -87,7 +91,7 @@ export class ProconexServiceClient extends EaCBaseClient {
 
             return acc;
           },
-          {} as Record<string, string>,
+          {} as Record<string, string>
         );
 
         const response = await fetch(
@@ -96,7 +100,7 @@ export class ProconexServiceClient extends EaCBaseClient {
             method: 'POST',
             headers: this.loadHeaders(headersInit),
             body: data,
-          },
+          }
         );
 
         return response;
@@ -104,7 +108,7 @@ export class ProconexServiceClient extends EaCBaseClient {
       UploadStream: async (
         workflowLookup: string,
         stream: ReadableStream<Uint8Array>,
-        headers: Headers,
+        headers: Headers
       ): Promise<Response> => {
         const headersInit = Array.from(headers.entries()).reduce(
           (acc, [key, value]) => {
@@ -112,7 +116,7 @@ export class ProconexServiceClient extends EaCBaseClient {
 
             return acc;
           },
-          {} as Record<string, string>,
+          {} as Record<string, string>
         );
 
         const response = await fetch(
@@ -121,7 +125,7 @@ export class ProconexServiceClient extends EaCBaseClient {
             method: 'POST',
             headers: this.loadHeaders(headersInit),
             body: stream,
-          },
+          }
         );
 
         return response;
@@ -170,14 +174,14 @@ export class ProconexServiceClient extends EaCBaseClient {
 
   //#region Helpers
   protected loadHeaders(
-    headers: HeadersInit | undefined = undefined,
+    headers: HeadersInit | undefined = undefined
   ): HeadersInit {
     return establishHeaders(
       new Headers({
         Authorization: `Bearer ${this.apiToken}`,
         'Content-Type': 'application/json',
       }),
-      (headers as Record<string, string>) || {},
+      (headers as Record<string, string>) || {}
     );
   }
   //#endregion
