@@ -1,3 +1,3 @@
-export * from 'https://deno.land/x/fathym_common@v0.0.185/mod.ts';
-export * from 'https://deno.land/x/fathym_everything_as_code@v0.0.417/mod.ts';
-export * from 'https://deno.land/x/fathym_everything_as_code_api@v0.0.44/mod.ts';
+export * from 'jsr:@fathym/common@0.0.211';
+export * from 'jsr:@fathym/eac@0.0.436';
+export * from 'jsr:@fathym/eac-api@0.0.51';
