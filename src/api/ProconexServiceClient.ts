@@ -77,6 +77,22 @@ export class ProconexServiceClient extends EaCBaseClient {
 
         return response;
       },
+      Retriever: {
+        Refresh: async (workflowLookup: string): Promise<Response> => {
+          const response = await fetch(
+            this.loadClientUrl(
+              `workflows/${workflowLookup}/documents/retriever/refresh`,
+            ),
+            {
+              method: 'PUT',
+              headers: this.loadHeaders(),
+              body: JSON.stringify({}),
+            },
+          );
+
+          return response;
+        },
+      },
       Upload: async (
         workflowLookup: string,
         data: FormData,
