@@ -18,5 +18,5 @@ export function createDocPath(
     filePath = new URL(`${docLookup}/`, filePath);
   }
 
-  return filePath.pathname;
+  return filePath.pathname.slice(0, -1);
 }
