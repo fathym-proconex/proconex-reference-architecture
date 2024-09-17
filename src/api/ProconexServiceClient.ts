@@ -19,6 +19,68 @@ export class ProconexServiceClient extends EaCBaseClient {
   }
 
   //#region API Methods
+  Profiles = {
+    Create: async (
+      examples: Record<string, string>,
+      extractionTemplate?: string,
+    ): Promise<EaCStatus> => {
+      const response = await fetch(this.loadClientUrl(`profiles`), {
+        method: 'POST',
+        headers: this.loadHeaders(),
+        body: JSON.stringify({
+          Examples: examples,
+          ExtractionTemplate: extractionTemplate,
+        }),
+      });
+
+      return await this.json(response);
+    },
+
+    Delete: async (profileLookup: string): Promise<EaCStatus> => {
+      const response = await fetch(
+        this.loadClientUrl(`profiles/${profileLookup}`),
+        {
+          method: 'DELETE',
+          headers: this.loadHeaders(),
+        },
+      );
+
+      return await this.json(response);
+    },
+
+    Get: async (profileLookup: string): Promise<EaCStatus> => {
+      const response = await fetch(
+        this.loadClientUrl(`profiles/${profileLookup}`),
+        {
+          method: 'GET',
+          headers: this.loadHeaders(),
+        },
+      );
+
+      return await this.json(response);
+    },
+
+    Update: async (
+      profileLookup: string,
+      examples: Record<string, string>,
+      extractionTemplate?: string,
+    ): Promise<EaCStatus> => {
+      const response = await fetch(
+        this.loadClientUrl(`profiles/${profileLookup}`),
+        {
+          method: 'PUT',
+          headers: this.loadHeaders(),
+          body: JSON.stringify({
+            Examples: examples,
+            ExtractionTemplate: extractionTemplate,
+          }),
+        },
+      );
+
+      return await this.json(response);
+    },
+  };
+
   Workflows = {
     Create: async (workflowName: string): Promise<EaCStatus> => {
       const response = await fetch(this.loadClientUrl(`workflows`), {
