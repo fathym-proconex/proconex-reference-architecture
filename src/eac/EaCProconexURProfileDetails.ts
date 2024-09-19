@@ -3,7 +3,7 @@ import { EaCVertexDetails } from '../src.deps.ts';
 export type EaCProconexURProfileDetails = {
   Examples: Record<string, string>;
 
-  ExtractionTemplate?: string;
+  ExtractionInstructions?: string;
 } & EaCVertexDetails;
 
 export function isEaCProconexURProfileDetails(

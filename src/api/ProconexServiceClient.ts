@@ -22,14 +22,14 @@ export class ProconexServiceClient extends EaCBaseClient {
   Profiles = {
     Create: async (
       examples: Record<string, string>,
-      extractionTemplate?: string,
+      extractionInstructions?: string,
     ): Promise<EaCStatus> => {
       const response = await fetch(this.loadClientUrl(`profiles`), {
         method: 'POST',
         headers: this.loadHeaders(),
         body: JSON.stringify({
           Examples: examples,
-          ExtractionTemplate: extractionTemplate,
+          ExtractionInstructions: extractionInstructions,
         }),
       });
 
@@ -63,7 +63,7 @@ export class ProconexServiceClient extends EaCBaseClient {
     Update: async (
       profileLookup: string,
       examples: Record<string, string>,
-      extractionTemplate?: string,
+      extractionInstructions?: string,
     ): Promise<EaCStatus> => {
       const response = await fetch(
         this.loadClientUrl(`profiles/${profileLookup}`),
@@ -72,7 +72,7 @@ export class ProconexServiceClient extends EaCBaseClient {
           headers: this.loadHeaders(),
           body: JSON.stringify({
             Examples: examples,
-            ExtractionTemplate: extractionTemplate,
+            ExtractionInstructions: extractionInstructions,
           }),
         },
       );
