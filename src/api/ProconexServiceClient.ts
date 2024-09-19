@@ -139,6 +139,21 @@ export class ProconexServiceClient extends EaCBaseClient {
 
         return response;
       },
+      Extract: async (
+        workflowLookup: string,
+      ): Promise<Response> => {
+        const response = await fetch(
+          this.loadClientUrl(
+            `workflows/${workflowLookup}/documents/extract`,
+          ),
+          {
+            method: 'GET',
+            headers: this.loadHeaders(),
+          },
+        );
+
+        return response;
+      },
       Retriever: {
         Refresh: async (workflowLookup: string): Promise<Response> => {
           const response = await fetch(
