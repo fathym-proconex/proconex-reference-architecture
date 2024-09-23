@@ -139,13 +139,9 @@ export class ProconexServiceClient extends EaCBaseClient {
 
         return response;
       },
-      Extract: async (
-        workflowLookup: string,
-      ): Promise<Response> => {
+      Extract: async (workflowLookup: string): Promise<Response> => {
         const response = await fetch(
-          this.loadClientUrl(
-            `workflows/${workflowLookup}/documents/extract`,
-          ),
+          this.loadClientUrl(`workflows/${workflowLookup}/documents/extract`),
           {
             method: 'GET',
             headers: this.loadHeaders(),
@@ -215,6 +211,20 @@ export class ProconexServiceClient extends EaCBaseClient {
             method: 'POST',
             headers: this.loadHeaders(headersInit),
             body: stream,
+          },
+        );
+
+        return response;
+      },
+    },
+
+    Requirements: {
+      List: async (workflowLookup: string): Promise<Response> => {
+        const response = await fetch(
+          this.loadClientUrl(`workflows/${workflowLookup}/requirements`),
+          {
+            method: 'GET',
+            headers: this.loadHeaders(),
           },
         );
 
