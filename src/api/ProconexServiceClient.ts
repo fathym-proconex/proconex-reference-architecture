@@ -219,7 +219,9 @@ export class ProconexServiceClient extends EaCBaseClient {
     },
 
     Requirements: {
-      List: async (workflowLookup: string): Promise<Response> => {
+      List: async (
+        workflowLookup: string,
+      ): Promise<{ [reqId: string]: string }> => {
         const response = await fetch(
           this.loadClientUrl(`workflows/${workflowLookup}/requirements`),
           {
@@ -228,7 +230,7 @@ export class ProconexServiceClient extends EaCBaseClient {
           },
         );
 
-        return response;
+        return await response.json();
       },
     },
   };
