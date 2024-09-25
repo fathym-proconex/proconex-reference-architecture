@@ -239,6 +239,24 @@ export class ProconexServiceClient extends EaCBaseClient {
         return await response.json();
       },
     },
+
+    TraceMatrix: {
+      Download: async (
+        workflowLookup: string,
+      ): Promise<Response> => {
+        const response = await fetch(
+          this.loadClientUrl(
+            `workflows/${workflowLookup}/trace-matrix/download`,
+          ),
+          {
+            method: 'GET',
+            headers: this.loadHeaders(),
+          },
+        );
+
+        return response;
+      },
+    },
   };
 
   Workspaces = {
