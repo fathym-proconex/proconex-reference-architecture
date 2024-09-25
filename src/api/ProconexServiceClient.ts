@@ -168,6 +168,7 @@ export class ProconexServiceClient extends EaCBaseClient {
       },
       Upload: async (
         workflowLookup: string,
+        type: string,
         data: FormData,
         headers: Headers,
       ): Promise<Response> => {
@@ -181,7 +182,9 @@ export class ProconexServiceClient extends EaCBaseClient {
         );
 
         const response = await fetch(
-          this.loadClientUrl(`workflows/${workflowLookup}/documents/upload`),
+          this.loadClientUrl(
+            `workflows/${workflowLookup}/documents/upload?type=${type}`,
+          ),
           {
             method: 'POST',
             headers: this.loadHeaders(headersInit),
@@ -193,6 +196,7 @@ export class ProconexServiceClient extends EaCBaseClient {
       },
       UploadStream: async (
         workflowLookup: string,
+        type: string,
         stream: ReadableStream<Uint8Array>,
         headers: Headers,
       ): Promise<Response> => {
@@ -206,7 +210,9 @@ export class ProconexServiceClient extends EaCBaseClient {
         );
 
         const response = await fetch(
-          this.loadClientUrl(`workflows/${workflowLookup}/documents/upload`),
+          this.loadClientUrl(
+            `workflows/${workflowLookup}/documents/upload?type=${type}`,
+          ),
           {
             method: 'POST',
             headers: this.loadHeaders(headersInit),

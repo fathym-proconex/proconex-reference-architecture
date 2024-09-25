@@ -1,14 +1,15 @@
 import { EaCVertexDetails } from '../src.deps.ts';
 
+export type EaCProconexDocument = {
+  ProfileLookup?: string;
+
+  Type: 'requirements' | 'iq-oq' | 'trace-matrix';
+};
+
 export type EaCProconexURWorkflowDetails = {
   DFSLookup: string;
 
-  Documents: Record<
-    string,
-    {
-      ProfileLookup?: string;
-    } | null
-  >;
+  Documents: Record<string, EaCProconexDocument>;
 } & EaCVertexDetails;
 
 export function isEaCProconexURWorkflowDetails(
