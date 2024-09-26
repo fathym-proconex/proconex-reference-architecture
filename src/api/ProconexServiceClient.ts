@@ -202,6 +202,7 @@ export class ProconexServiceClient extends EaCBaseClient {
         type: string,
         stream: ReadableStream<Uint8Array>,
         headers: Headers,
+        profileLookup?: string,
       ): Promise<Response> => {
         const headersInit = Array.from(headers.entries()).reduce(
           (acc, [key, value]) => {
@@ -212,9 +213,11 @@ export class ProconexServiceClient extends EaCBaseClient {
           {} as Record<string, string>,
         );
 
+        const profileLookupParam = profileLookup ? `&profileLookup=${profileLookup}` : '';
+
         const response = await fetch(
           this.loadClientUrl(
-            `workflows/${workflowLookup}/documents/upload?type=${type}`,
+            `workflows/${workflowLookup}/documents/upload?type=${type}${profileLookupParam}`,
           ),
           {
             method: 'POST',
