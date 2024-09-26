@@ -222,6 +222,25 @@ export class ProconexServiceClient extends EaCBaseClient {
 
         return response;
       },
+
+      IQOQ: {
+        Extract: async (
+          workflowLookup: string,
+          docLookup: string,
+        ): Promise<Response> => {
+          const response = await fetch(
+            this.loadClientUrl(
+              `workflows/${workflowLookup}/documents/${docLookup}/iq-oq/extract`,
+            ),
+            {
+              method: 'GET',
+              headers: this.loadHeaders(),
+            },
+          );
+
+          return response;
+        },
+      },
     },
 
     Requirements: {
@@ -241,9 +260,7 @@ export class ProconexServiceClient extends EaCBaseClient {
     },
 
     TraceMatrix: {
-      Download: async (
-        workflowLookup: string,
-      ): Promise<Response> => {
+      Download: async (workflowLookup: string): Promise<Response> => {
         const response = await fetch(
           this.loadClientUrl(
             `workflows/${workflowLookup}/trace-matrix/download`,
