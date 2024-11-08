@@ -21,7 +21,7 @@ export type UserWorkspaceRecrod =
 
 export class ProconexServiceClient extends EaCBaseClient {
   /** */
-  constructor(baseUrl: URL, apiToken: string) {
+  constructor(protected baseUrl: URL, protected apiToken: string) {
     super(baseUrl, apiToken);
   }
 
@@ -392,16 +392,16 @@ export class ProconexServiceClient extends EaCBaseClient {
   //#endregion
 
   //#region Helpers
-  // protected override loadHeaders(
-  //   headers: HeadersInit | undefined = undefined,
-  // ): HeadersInit {
-  //   return establishHeaders(
-  //     new Headers({
-  //       Authorization: `Bearer ${this.apiToken}`,
-  //       'Content-Type': 'application/json',
-  //     }),
-  //     (headers as Record<string, string>) || {},
-  //   );
-  // }
+  protected override loadHeaders(
+    headers: HeadersInit | undefined = undefined,
+  ): HeadersInit {
+    return establishHeaders(
+      new Headers({
+        Authorization: `Bearer ${this.apiToken}`,
+        'Content-Type': 'application/json',
+      }),
+      (headers as Record<string, string>) || {},
+    );
+  }
   //#endregion
 }
