@@ -1,5 +1,12 @@
+// deno-lint-ignore-file no-explicit-any
 import { EverythingAsCodeProconex } from '../eac/EverythingAsCodeProconex.ts';
-import { EaCBaseClient, EaCStatus, establishHeaders, UserEaCRecord } from '../src.deps.ts';
+import {
+  EaCBaseClient,
+  EaCStatus,
+  establishHeaders,
+  ExplorerRequest,
+  UserEaCRecord,
+} from '../src.deps.ts';
 
 export type UserWorkspaceRecrod =
   & Omit<
@@ -317,6 +324,69 @@ export class ProconexServiceClient extends EaCBaseClient {
       });
 
       return await this.json(response);
+    },
+
+    IoT: {
+      Upload: async (data: FormData, headers: Headers): Promise<Response> => {
+        const headersInit = Array.from(headers.entries()).reduce(
+          (acc, [key, value]) => {
+            acc[key] = value;
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        const response = await fetch(
+          this.loadClientUrl(`workspaces/iot/upload`),
+          {
+            method: 'POST',
+            headers: this.loadHeaders(headersInit),
+            body: data,
+          },
+        );
+
+        return response;
+      },
+      UploadStream: async (
+        stream: ReadableStream<Uint8Array>,
+        headers: Headers,
+      ): Promise<Response> => {
+        const headersInit = Array.from(headers.entries()).reduce(
+          (acc, [key, value]) => {
+            acc[key] = value;
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        const response = await fetch(
+          this.loadClientUrl(`workspaces/iot/upload`),
+          {
+            method: 'POST',
+            headers: this.loadHeaders(headersInit),
+            body: stream,
+          },
+        );
+
+        return response;
+      },
+
+      Warm: {
+        Explorer: async (expReq: ExplorerRequest): Promise<any> => {
+          const response = await fetch(
+            this.loadClientUrl(`workspaces/iot/warm/explorer`),
+            {
+              method: 'POST',
+              headers: this.loadHeaders(),
+              body: JSON.stringify(expReq),
+            },
+          );
+
+          return await this.json(response);
+        },
+      },
     },
   };
   //#endregion
