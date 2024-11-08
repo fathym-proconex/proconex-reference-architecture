@@ -21,7 +21,7 @@ export type UserWorkspaceRecrod =
 
 export class ProconexServiceClient extends EaCBaseClient {
   /** */
-  constructor(protected baseUrl: URL, protected apiToken: string) {
+  constructor(baseUrl: URL, apiToken: string) {
     super(baseUrl, apiToken);
   }
 
