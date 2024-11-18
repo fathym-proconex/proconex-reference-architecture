@@ -3,14 +3,14 @@ import { EverythingAsCodeProconex } from '../eac/EverythingAsCodeProconex.ts';
 import {
   EaCBaseClient,
   EaCStatus,
+  // ExplorerRequest,
+  EaCUserRecord,
   establishHeaders,
-  ExplorerRequest,
-  UserEaCRecord,
 } from '../src.deps.ts';
 
 export type UserWorkspaceRecrod =
   & Omit<
-    UserEaCRecord,
+    EaCUserRecord,
     'EnterpriseLookup' | 'EnterpriseName'
   >
   & {
@@ -374,7 +374,8 @@ export class ProconexServiceClient extends EaCBaseClient {
       },
 
       Warm: {
-        Explorer: async (expReq: ExplorerRequest): Promise<any> => {
+        Explorer: async (expReq: any): Promise<any> => {
+          //ExplorerRequest): Promise<any> => {
           const response = await fetch(
             this.loadClientUrl(`workspaces/iot/warm/explorer`),
             {
