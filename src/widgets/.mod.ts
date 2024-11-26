@@ -1,1 +1,1 @@
-export * from './WidgetDefinitionsSchema.ts';
+export * from './WidgetDefinitionSchema.ts';
