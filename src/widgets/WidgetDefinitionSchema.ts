@@ -8,6 +8,7 @@ export const WidgetDefinitionSchema: z.ZodObject<
     Description: z.ZodString;
     Schema: z.ZodObject<{}, 'strip', z.ZodTypeAny, {}, {}>;
     AdditionalInstructions: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    UsageGuide: z.ZodOptional<z.ZodString>;
   },
   'strip',
   z.ZodTypeAny,
@@ -16,12 +17,14 @@ export const WidgetDefinitionSchema: z.ZodObject<
     Description: string;
     Schema: {};
     AdditionalInstructions?: string[];
+    UsageGuide?: string;
   },
   {
     Name: string;
     Description: string;
     Schema: {};
     AdditionalInstructions?: string[];
+    UsageGuide?: string;
   }
 > = z
   .object({
@@ -46,9 +49,15 @@ export const WidgetDefinitionSchema: z.ZodObject<
       .describe(
         'An array of instructional text providing guidance on how to configure and use this widget effectively. Includes tips on data formatting, available options, and expected behaviors.',
       ),
+    UsageGuide: z
+      .string()
+      .optional()
+      .describe(
+        'A comprehensive guide for AI or users, explaining the value, benefits, and advanced use cases of the widget. Includes creative ideas for leveraging its capabilities and integrating it into workflows or designs.',
+      ),
   })
   .describe(
-    'An object representing a single widget definition, including its name, description, schema, and optional instructional text.',
+    'An object representing a single widget definition, including its name, description, schema, optional instructional text, and a detailed usage guide.',
   );
 
 export type WidgetDefinitionSchema = z.infer<typeof WidgetDefinitionSchema>;

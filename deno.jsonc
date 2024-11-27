@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "exports": {
     ".": "./mod.ts",
+    "./synaptic": "./src/synaptic/.mod.ts",
     "./widgets": "./src/widgets/.mod.ts"
   },
   "tasks": {
