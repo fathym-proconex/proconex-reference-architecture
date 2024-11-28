@@ -5,10 +5,6 @@ import { Annotation, BaseMessage, BinaryOperatorAggregate, InferSynapticState } 
 export const QueryCircuitGraphState: {
   CurrentQuery: BinaryOperatorAggregate<string, string>;
   DataQuery: BinaryOperatorAggregate<string, string>;
-  DataQueries: BinaryOperatorAggregate<
-    { WidgetType: string; Query: string }[],
-    { WidgetType: string; Query: string }[]
-  >;
   Error: BinaryOperatorAggregate<string, string>;
   Intent: BinaryOperatorAggregate<string, string>;
   Justification: BinaryOperatorAggregate<string, string>;
@@ -24,6 +20,10 @@ export const QueryCircuitGraphState: {
     Record<string, WidgetDefinitionSchema>,
     Record<string, WidgetDefinitionSchema>
   >;
+  WidgetQueries: BinaryOperatorAggregate<
+    { WidgetType: string; Query: string }[],
+    { WidgetType: string; Query: string }[]
+  >;
   WidgetResults: BinaryOperatorAggregate<
     Record<string, any>,
     Record<string, any>
@@ -36,10 +36,6 @@ export const QueryCircuitGraphState: {
   DataQuery: Annotation<string>({
     reducer: (_x, y) => y,
     default: () => '',
-  }),
-  DataQueries: Annotation<{ WidgetType: string; Query: string }[]>({
-    reducer: (_x, y) => y,
-    default: () => [] as { WidgetType: string; Query: string }[],
   }),
   Error: Annotation<string>({
     reducer: (_x, y) => y,
@@ -76,6 +72,10 @@ export const QueryCircuitGraphState: {
   WidgetDefinitions: Annotation<Record<string, WidgetDefinitionSchema>>({
     reducer: (_x, y) => y,
     default: () => ({}),
+  }),
+  WidgetQueries: Annotation<{ WidgetType: string; Query: string }[]>({
+    reducer: (_x, y) => y,
+    default: () => [] as { WidgetType: string; Query: string }[],
   }),
   WidgetResults: Annotation<Record<string, any>>({
     reducer: (_x, y) => y,
