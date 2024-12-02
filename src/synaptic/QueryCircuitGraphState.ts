@@ -15,7 +15,10 @@ export const QueryCircuitGraphState: {
   QueryMessage: BinaryOperatorAggregate<string, string>;
   QueryResults: BinaryOperatorAggregate<any, any>;
   SuggestedWidgets: BinaryOperatorAggregate<string[], string[]>;
-  TypescriptModule: BinaryOperatorAggregate<string, string>;
+  TypescriptModules: BinaryOperatorAggregate<
+    Record<string, string>,
+    Record<string, string>
+  >;
   WidgetDefinitions: BinaryOperatorAggregate<
     Record<string, WidgetDefinitionSchema>,
     Record<string, WidgetDefinitionSchema>
@@ -65,9 +68,9 @@ export const QueryCircuitGraphState: {
     reducer: (_x, y) => y,
     default: () => [],
   }),
-  TypescriptModule: Annotation<string>({
+  TypescriptModules: Annotation<Record<string, string>>({
     reducer: (_x, y) => y,
-    default: () => '',
+    default: () => ({}),
   }),
   WidgetDefinitions: Annotation<Record<string, WidgetDefinitionSchema>>({
     reducer: (_x, y) => y,
